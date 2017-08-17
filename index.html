@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -83,17 +83,206 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>什么是数组：</p>
-<pre><code>数组也是对象。
+        <h3 id="什么是数组："><a href="#什么是数组：" class="headerlink" title="什么是数组："></a>什么是数组：</h3><p>数组也是对象,比对象多了一个length属性。</p>
+<p>每个对象都是由属性名和属性值组成。</p>
+<p>我们看到的是数组的属性值，数组的属性名是从0开始的数字,我们把代表第几项的数字的属性名叫做数组的“索引”。</p>
+<p>数组有一个length属性，代表数组的长度。</p>
+<p>获取当前索引的属性值方法：arr[索引]。</p>
+<p>获取数组的总长度：arr.length</p>
+<p>数组中的length属性，是浏览器天生就给数组增加的，不是我们自己编写的属性，这个属性属于当前数组不可枚举的属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var arr=[23,43,32,11];</div><div class="line">console.dir(arr);</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/08/12/JavaScript数组知识点总结/../../../../../images/arr1.png" alt="&quot;arr1&quot;">  </p>
+<h3 id="循环数组中的每一项"><a href="#循环数组中的每一项" class="headerlink" title="循环数组中的每一项"></a>循环数组中的每一项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">for循环</div><div class="line">    for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">        console.log(arr[i]);</div><div class="line">    &#125;</div><div class="line">for in 循环：是用来遍历一个对象中属性名和属性值的，但是对于当前对象不可枚举的属性我们通过它是遍历不到的，例如：我们无法遍历到ary.length这个属性。</div><div class="line">    for(var i in arr)&#123;</div><div class="line">        console.log(arr[i]);</div><div class="line">    &#125;</div><div class="line">for of 循环</div><div class="line">    for(var i of arr)&#123;</div><div class="line">        console.log(i);</div><div class="line">    &#125;</div><div class="line">forEach循环</div><div class="line">    arr.forEach(function (i,index,input) &#123;</div><div class="line">        console.log(i);</div><div class="line">        console.log(index);</div><div class="line">        console.log(input);</div><div class="line">    &#125;)</div></pre></td></tr></table></figure>
+<h3 id="数组中常用方法"><a href="#数组中常用方法" class="headerlink" title="数组中常用方法"></a>数组中常用方法</h3><p>学习数组中常用的方法，我们需要按照四个维度去探讨</p>
+<ul>
+<li>方法的作用</li>
+<li>需要传哪些参数</li>
+<li>是否有返回值，返回值是什么</li>
+<li>通过此方法是否对原来数组产生改变<h4 id="关于数组的增加和删除方法"><a href="#关于数组的增加和删除方法" class="headerlink" title="关于数组的增加和删除方法"></a>关于数组的增加和删除方法</h4>1.push():</li>
+<li>作用：可向数组末尾添加一个或多个元素</li>
+<li>参数：向末尾增加的一个或多个元素</li>
+<li>是否有返回值：返回新的数组长度</li>
+<li><p>原数组是否改变：原数组改变</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr=[23,43,32,11];</div><div class="line">var b=arr.push(83);</div><div class="line">console.log(arr);//[23,43,32,11,83]</div><div class="line">console.log(b);//5</div></pre></td></tr></table></figure>
+</li>
+<li><p>扩展：不使用push,也想向数组末尾增加内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">arr[arr.length]=300;</div><div class="line">arr.splice(arr.length,0,m);//push的另外一种写法</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>2.pop():</p>
+<ul>
+<li>作用：删除数组最后一个元素</li>
+<li>参数：没有参数</li>
+<li>是否有返回值：返回数组最后一个值</li>
+<li><p>原数组是否改变：原数组改变，数组长度减1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr=[23,43,32,11];</div><div class="line">var b=arr.pop();</div><div class="line">console.log(arr);//[23,43,32]</div><div class="line">console.log(b);//11</div></pre></td></tr></table></figure>
+</li>
+<li><p>扩展：不使用pop,也想删除数组末尾内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">arr.length--;</div><div class="line">arr.length-=1;</div><div class="line">arr.length=ary.length-1;</div><div class="line">arr.splice(ary.length-1);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>3.shift():</p>
+<ul>
+<li>作用：删除数组第一项</li>
+<li>参数：没有参数</li>
+<li>是否有返回值：返回数组第一项的值</li>
+<li>原数组是否改变：原数组改变，数组长度减1<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr=[23,43,32,11];</div><div class="line">var b=arr.shift();</div><div class="line">console.log(arr);//[43, 32, 11]</div><div class="line">console.log(b);//23</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>4.unshift():</p>
+<ul>
+<li>作用：数组前端添加一项或多项</li>
+<li>参数：要添加的数字</li>
+<li>是否有返回值：返回添加后的新数组长度</li>
+<li>原数组是否改变：原数组改变。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr=[23,43,32,11];</div><div class="line">var b=arr.unshift(5,6);</div><div class="line">console.log(arr);//[5, 6, 23, 43, 32, 11]</div><div class="line">console.log(b);//6</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>5.splice():</p>
+<ul>
+<li>作用：既能实现删除，也能实现增加，还能实现修改</li>
+<li>参数：删除(start,delCount):第一项位置，要删除的项数<pre><code>插入(start,0,args):start起始位置，0要删除项数，args插入的项
+替换(start,delCount,args):起始位置，要删除项数，插入的任意数
+</code></pre></li>
+<li>是否有返回值：把删除的内容以一个新数组的方法返回</li>
+<li>原数组是否改变：原数组改变。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">arr[2]=340;//利用对象的操作方式也可以修改数组某一项的值</div><div class="line">arr.splice(n);//从索引n开始，删除到数组的末尾</div><div class="line">arr.splice(0);//把原来的数组中的每一项都删除掉（清空数组），把之前的每一项的值以一个新的数组返回（相当于把之前的数组克隆了一分一模一样的，只不过这样的克隆会修改原来的数组）</div><div class="line">arr.splice();//数组中一项都没有删除，返回的是一个空数组</div><div class="line">arr.splice(arr.length,0,m);//push的另外一种写法</div><div class="line">删除方法:</div><div class="line">    var arr=[23,43,32,11];</div><div class="line">    var b=arr.splice(2,2);</div><div class="line">    console.log(arr);//[23, 43]</div><div class="line">    console.log(b);//[32, 11]</div><div class="line">插入方法:</div><div class="line">    var arr=[23,43,32,11];</div><div class="line">    var b=arr.splice(2,0,12,34,56,63);</div><div class="line">    console.log(arr);//[23, 43, 12, 34, 56, 63, 32, 11]</div><div class="line">    console.log(b);//[]</div><div class="line">替换方法:</div><div class="line">    var arr=[23,43,32,11];</div><div class="line">    var b=arr.splice(1,2,12,34,56,63);</div><div class="line">    console.log(arr);//[23, 12, 34, 56, 63, 11]</div><div class="line">    console.log(b);//[43, 32]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="关于数组的截取和拼接"><a href="#关于数组的截取和拼接" class="headerlink" title="关于数组的截取和拼接"></a>关于数组的截取和拼接</h4><p>6.slice():实现数组的截取，在原来的数组中截取某一部分</p>
+<ul>
+<li>作用：从已有数组中返回规定的元素</li>
+<li>参数：(n,m),从索引n开始，找到索引为m处的数组(不包含m)</li>
+<li>是否有返回值：返回截取的数组</li>
+<li>原数组是否改变：原数组不变<br>slice(n):从索引n开始一直找到数组的末尾<br>slice(0),slice():把原来的数组克隆一份一模一样的新数组返回<br>slice(-1);//[11]:从数组尾部开始算起的元素(-1是最后一个元素，-2是倒数第二个元素)<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr=[23,43,32,11];</div><div class="line">var b=arr.slice(1,2);</div><div class="line">console.log(arr);//[23, 43, 32, 11]</div><div class="line">console.log(b);//[43]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>7.concat():</p>
+<ul>
+<li>作用：把两个数组拼接到一起</li>
+<li>参数：ary1.concat(ary2);参数为要拼接的数组</li>
+<li>是否有返回值：无返回值</li>
+<li>原数组是否改变：原数组不变<br>ary1.concat():把ary1克隆一份一模一样的数组<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var ary=[23,43,32,11];</div><div class="line">var ary2=[30,10,80,90];</div><div class="line">var newAry=ary.concat(ary2);</div><div class="line">console.log(ary);//[23, 43, 32, 11]</div><div class="line">console.log(ary2);//[30,10,80,90]</div><div class="line">console.log(newAry);//[23, 43, 32, 11, 30, 10</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>不考虑原数组是否改变，克隆数组方法有：<br>    ary1.concat():把ary1克隆一份一模一样的数组<br>    ary1.slice();<br>    ary1.slice(0);<br>    ary1.splice(0);</p>
+<h4 id="可数组转换为字符串"><a href="#可数组转换为字符串" class="headerlink" title="可数组转换为字符串"></a>可数组转换为字符串</h4><p>8.toString():</p>
+<ul>
+<li>作用：把数组转换为字符串</li>
+<li>参数：无参数</li>
+<li>是否有返回值：无返回值</li>
+<li>原数组是否改变：原数组不变<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var ary=[23,43,32,11];</div><div class="line">var b=ary.toString();</div><div class="line">console.log(ary);//[23, 43, 32, 11]</div><div class="line">console.log(b);//&apos;23,43,32,11&apos;</div><div class="line">console.log(typeof b);//string</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>9.join():</p>
+<ul>
+<li>作用：按照每一个分隔符，把数组中的每一项拼接成一个字符串</li>
+<li>参数：分隔符</li>
+<li>是否有返回值：无返回值</li>
+<li>原数组是否改变：原数组不变<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var ary=[23,43,32,11];</div><div class="line">var b=ary.join(&apos;+&apos;);</div><div class="line">console.log(ary);//[23, 43, 32, 11]</div><div class="line">console.log(b);//&apos;23+43+32+11&apos;</div><div class="line">console.log(eval(b));//109</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>扩展：eval：js中把字符串变为js表达式执行的一个方法</p>
+<pre><code>console.log(eval(&apos;23+43+32+11&apos;));//109
+</code></pre><p>把字组中的每一项进行相加求和</p>
+<pre><code>console.log(eval(ary.join(&apos;+&apos;)));
+</code></pre><h4 id="关于数组的排序和排列方法"><a href="#关于数组的排序和排列方法" class="headerlink" title="关于数组的排序和排列方法"></a>关于数组的排序和排列方法</h4><p>10.reverse():</p>
+<ul>
+<li>作用：把数组倒序排列</li>
+<li>参数：无</li>
+<li>是否有返回值：返回倒序的数组</li>
+<li>原数组是否改变：原数组改变<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var ary=[23,43,32,11];</div><div class="line">var b=ary.reverse();</div><div class="line">console.log(ary);//[11, 32, 43, 23]</div><div class="line">console.log(b);//[11, 32, 43, 23]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>11.sort():</p>
+<ul>
+<li>作用：给数组进行排序</li>
+<li>参数：无</li>
+<li>是否有返回值：返回排序后的数组</li>
+<li>原数组是否改变：原数组改变<br>ary.sort():这样的话只能处理10以内的数字进行排序，因为它是按照UNICODE编码进行排序的。</li>
+</ul>
+<p>由小到大排序方法：</p>
+<pre><code>ary.sort(function(a,b){
+    return a-b;
+})
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var ary=[23,43,32,11];</div><div class="line">var b=ary.sort();</div><div class="line">console.log(ary);//[11, 23, 32, 43]</div><div class="line">console.log(b);//[11, 23, 32, 43]</div><div class="line"></div><div class="line">var ary=[23,43,190,32,11];</div><div class="line">var b=ary.sort(function (a,b) &#123;</div><div class="line">    return a-b</div><div class="line">&#125;);</div><div class="line">console.log(ary);//[11, 23, 32, 43, 190]</div><div class="line">console.log(b);//[11, 23, 32, 43, 190]</div></pre></td></tr></table></figure>
+<h4 id="只有在标准浏览器中兼容的方法，在IE6-8不兼容的方法"><a href="#只有在标准浏览器中兼容的方法，在IE6-8不兼容的方法" class="headerlink" title="只有在标准浏览器中兼容的方法，在IE6~8不兼容的方法"></a>只有在标准浏览器中兼容的方法，在IE6~8不兼容的方法</h4><p>12.indexOf()</p>
+<ul>
+<li>作用：当前内容在数组中第一次出现位置的索引</li>
+<li>参数：索引值</li>
+<li>是否有返回值：如果数组中没有这一项，返回-1，如果有这一项，索引是几就返回几</li>
+<li>原数组是否改变：原数组不变<br>indexOf用法：可以检证当前内容在数组中是否存在<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if(ary.indexOf(&apos;wbq&apos;)&gt;-1)&#123;</div><div class="line">    //说明&apos;wbq&apos;在数组中存在</div><div class="line">&#125;else&#123;</div><div class="line">    //说明&apos;wbq&apos;在数组中不存在</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>13.lastIndexOf()</p>
+<ul>
+<li>作用：当前内容在数组中最后一次出现位置的索引</li>
+<li>参数：索引值</li>
+<li>是否有返回值：如果数组中没有这一项，返回-1，如果有这一项，索引是几就返回几</li>
+<li>原数组是否改变：原数组不变<br>字符串中也有这两个方法，但是字符串的这两个方法兼容所有的浏览器。<br>14.forEach()</li>
+<li>作用：遍历数组中的每一项</li>
+<li>参数：函数中的形参：数组项的值item,该项在数组中的位置index,数组对称本身input</li>
+<li>是否有返回值：没有返回值</li>
+<li>原数组是否改变：原数组不变<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var ary=[23,43,190,32,11];</div><div class="line">var b=ary.forEach(function (item,index) &#123;</div><div class="line">    console.log(item);//23,43,190,32,11</div><div class="line">    console.log(index);0,1,2,3,4</div><div class="line">&#125;);</div><div class="line">console.log(ary);//[11, 23, 32, 43, 190]</div><div class="line">console.log(b);//undefined</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>15.map()</p>
+<ul>
+<li>作用：遍历数组中的每一项(map和forEach语法一样，但比forEach多加了一个把原来内容进行替换的功能)</li>
+<li>参数：函数中的形参：数组项的值item,该项在数组中的位置index,数组对称本身input</li>
+<li>是否有返回值：返回每次函数调用的结果组成的数值</li>
+<li>原数组是否改变：原数组不变<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var ary=[23,43,190,32,11];</div><div class="line">var b=ary.map(function (item,index) &#123;</div><div class="line">    return item*10</div><div class="line">&#125;);</div><div class="line">console.log(ary);//[11, 23, 32, 43, 190]</div><div class="line">console.log(b);//[230, 430, 1900, 320, 110]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>map、forEach、for区别：</p>
+<pre><code>1. map速度比forEach快
+2. map会返回一个新数组，不对原数组产生影响
+   forEach不会产生新数组，对原数组也没有影响
+3. map因为返回数组所以可以链式操作，forEach不能
+4. map、forEach都比for要更好用
+</code></pre><p>16.every()</p>
+<ul>
+<li>作用：遍历数组中的每一项,对数组中的每一项运行给定函数，如果该函数对每一项都返回true,则返回true</li>
+<li>参数：函数中的形参：数组项的值item,该项在数组中的位置index,数组对称本身input</li>
+<li>是否有返回值：true或false</li>
+<li>原数组是否改变：原数组不变<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var ary=[23,43,190,32,11];</div><div class="line">var b=ary.every(function (item,index) &#123;</div><div class="line">    return item&gt;40</div><div class="line">&#125;);</div><div class="line">console.log(ary);//[11, 23, 32, 43, 190]</div><div class="line">console.log(b);//false</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>17.some():</p>
+<ul>
+<li>作用：遍历数组中的每一项,如果该函数有满足条件的元素，则返回true</li>
+<li>参数：函数中的形参：数组项的值item,该项在数组中的位置index,数组对称本身input</li>
+<li>是否有返回值：true或false</li>
+<li>原数组是否改变：原数组不变<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var ary=[23,43,190,32,11];</div><div class="line">var b=ary.some(function (item,index) &#123;</div><div class="line">    return item&gt;40</div><div class="line">&#125;);</div><div class="line">console.log(ary);//[11, 23, 32, 43, 190]</div><div class="line">console.log(b);//true</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>18.filter()</p>
+<ul>
+<li>作用：遍历数组中的每一项,返回该函数会返回true的项组成的数组</li>
+<li>参数：函数中的形参：数组项的值item,该项在数组中的位置index,数组对称本身input</li>
+<li>是否有返回值：返回符合条件组成的数值</li>
+<li>原数组是否改变：原数组不变<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var ary=[23,43,190,32,11];</div><div class="line">var b=ary.filter(function (item,index) &#123;</div><div class="line">    return item&gt;40</div><div class="line">&#125;);</div><div class="line">console.log(ary);//[11, 23, 32, 43, 190]</div><div class="line">console.log(b);//[43, 190]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>19.find()</p>
+<ul>
+<li>作用：遍历数组中的每一项,查找某个元素，返回true,则将当前遍历元素返回，不继续查找</li>
+<li>参数：函数中的形参：数组项的值item,该项在数组中的位置index,数组对称本身input</li>
+<li>是否有返回值：返回符合条件组成的元素</li>
+<li>原数组是否改变：原数组不变<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var ary=[23,43,190,32,11];</div><div class="line">var b=ary.find(function (item,index,input) &#123;</div><div class="line">    console.log(item);//23,43</div><div class="line">    console.log(index);//0,1</div><div class="line">    console.log(input);//[23, 43, 190, 32, 11]</div><div class="line">    return item&gt;40</div><div class="line">&#125;);</div><div class="line">console.log(ary);//[23, 43, 190, 32, 11]</div><div class="line">console.log(b);//43</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="归并方法"><a href="#归并方法" class="headerlink" title="归并方法"></a>归并方法</h4><p>20.reduce()</p>
+<ul>
+<li>作用：迭代数组的所有项，然后构建一个最终返回值。从数组第一项开始，逐个遍历到最后</li>
+<li>参数：函数中的形参：prev:前一个值，cur:当前值，index:项的索引，array:数组对象</li>
+<li>是否有返回值：返回符合条件组成的数值</li>
+<li>原数组是否改变：原数组不变<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">  </div><div class="line">* 作用：迭代数组的所有项，然后构建一个最终返回值。从数组最后一项开始，向前遍历到第一项</div><div class="line">* 参数：函数中的形参：数组项的值item,该项在数组中的位置index,数组对称本身input</div><div class="line">* 是否有返回值：返回符合条件组成的数值</div><div class="line">* 原数组是否改变：原数组不变</div><div class="line">console.dir(Array.prototype);//可以查看数组里面的所有方法</div><div class="line"></div><div class="line">### 数组去重方法</div><div class="line"></div><div class="line">利用对象的键值对方法</div><div class="line">1. 把数组中的每一项的值当做一个对象的属性名和属性值存储起来</div><div class="line">2. 但是在每一次存储之前，我们首先判断当前这一项(N)是否在对象中已经存在。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>```</p>
 
-每个对象都是由属性名和属性值组成。
-
-我们看到的是数组的属性值，数组是属性名是从0开始的数字。
-</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/12/JavaScript数组知识点总结/" data-id="cj68ibjlh00019n9r866qt4h9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/12/JavaScript数组知识点总结/" data-id="cj68ibjlh00019n9r866qt4h9" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -138,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/12/hello-world/" data-id="cj68ibjkd00009n9r3zuurzar" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/12/hello-world/" data-id="cj68ibjkd00009n9r3zuurzar" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -173,7 +362,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -198,7 +387,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
